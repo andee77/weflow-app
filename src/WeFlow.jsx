@@ -298,7 +298,7 @@ function NotifStrip({ tasks }) {
 }
 
 // ── Task row (minimal) ─────────────────────────────────────────────────────
-function TaskRow({ task, onToggle, onDelete }) {
+function TaskRow({ task, onToggle, onDelete, members=SEED_MEMBERS }) {
   const d=daysUntil(task.deadline), uc=urgencyColor(d);
   const label = d<0?"Overdue":d===0?"Today":d===1?"Tomorrow":`${d}d`;
   return (
@@ -537,7 +537,7 @@ function TasksTab({ tasks, setTasks, onShowAdd, members=SEED_MEMBERS, activeUser
           </div>
         )}
         {filtered.map(t=>(
-          <TaskRow key={t.id} task={t} onToggle={toggle} onDelete={del}/>
+          <TaskRow key={t.id} task={t} onToggle={toggle} onDelete={del} members={members}/>
         ))}
         {filtered.length>0&&<div style={{height:4}}/>}
       </div>
